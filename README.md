@@ -26,7 +26,7 @@ Running the app
    * Run 'composer update' from the root directory.
    * Create a new database called *paypal_pizza_app* and update connection parameters in app/bootstrap.php file.
    * Create the necessary tables as give in install/db.sql or simply run the install/create_tables.php file
-   * Optionally, update the *sdk_config.ini* file with your own client id and client secret.
+   * Optionally, update *app/bootstrap.php* with your own client id and client secret.
    * You are ready. Bring up http://localhost/rest-api-sample-app-php on your favourite browser.	
 	
 References

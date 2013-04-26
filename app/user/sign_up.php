@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			}
 			$userId = addUser($_POST['user']['email'], $_POST['user']['password'], $creditCardId);			
 		} catch(PPConnectionException $ex){
-			$errorMessage = parseApiError($ex->getData());
+			$errorMessage = $ex->getData() != '' ? parseApiError($ex->getData()) : $ex->getMessage();
 		} catch (Exception $ex) {
 			$errorMessage = $ex->getMessage();		
 		}

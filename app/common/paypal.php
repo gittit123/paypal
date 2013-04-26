@@ -32,7 +32,7 @@ function saveCard($params) {
 	$card->setExpire_year($params['expire_year']);
 	$card->setCvv2($params['cvv2']);
 	
-	$card->create();
+	$card->create(getApiContext());
 	return $card->getId();
 }
 
@@ -42,7 +42,7 @@ function saveCard($params) {
  * a previous create API call.
  */
 function getCreditCard($cardId) {
-	return CreditCard::get($cardId);
+	return CreditCard::get($cardId, getApiContext());
 }
 
 
@@ -86,7 +86,7 @@ function makePaymentUsingCC($creditCardId, $total, $currency, $payment_desc) {
 	$payment->setPayer($payer);
 	$payment->setTransactions(array($transaction));
 
-	$payment->create();
+	$payment->create(getApiContext());
 	return $payment;
 }
 
@@ -137,7 +137,7 @@ function makePaymentUsingPayPal($total, $currency, $payment_desc, $returnUrl, $c
 	$payment->setPayer($payer);
 	$payment->setTransactions(array($transaction));
 	
-	$payment->create();	
+	$payment->create(getApiContext());	
 	return $payment;
 }
 
@@ -155,10 +155,10 @@ function makePaymentUsingPayPal($total, $currency, $payment_desc, $returnUrl, $c
  */
 function executePayment($paymentId, $payerId) {
 	
-	$payment = Payment::get($paymentId);
+	$payment = Payment::get($paymentId, getApiContext());
 	$paymentExecution = new PaymentExecution();
 	$paymentExecution->setPayer_id($payerId);	
-	$payment->execute($paymentExecution);	
+	$payment->execute($paymentExecution, getApiContext());	
 	
 	return $payment;
 }

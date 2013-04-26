@@ -81,14 +81,21 @@ function getLink(array $links, $type) {
  * @return string
  */
 function parseApiError($errorJson) {
+	$msg = '';
+	
 	$data = json_decode($errorJson, true);
-	$msg = $data['name'] . " : " .  $data['message'] . "<br/>";
+	if(isset($data['name']) && isset($data['message'])) {
+		$msg .= $data['name'] . " : " .  $data['message'] . "<br/>";
+	}
 	if(isset($data['details'])) {
 		$msg .= "<ul>";
 		foreach($data['details'] as $detail) {
 			$msg .= "<li>" . $detail['field'] . " : " . $detail['issue'] . "</li>";	
 		}
 		$msg .= "</ul>";
+	}
+	if($msg == '') {
+		$msg = $errorJson;
 	}	
 	return $msg;
 }

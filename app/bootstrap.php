@@ -11,12 +11,37 @@ require_once __DIR__ . '/common/order.php';
 require_once __DIR__ . '/common/paypal.php';
 require_once __DIR__ . '/common/util.php';
 
-// Define the location of the sdk_config.ini file
-// This is needed by the REST SDK 
-define("PP_CONFIG_PATH", dirname(__DIR__));
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OauthTokenCredential;
 
 // Define connection parameters
 define('MYSQL_HOST', 'localhost:3306');
 define('MYSQL_USERNAME', 'user');
 define('MYSQL_PASSWORD', 'password');
 define('MYSQL_DB', 'paypal_pizza_app');
+
+// SDK Configuration
+function getApiContext() {
+	$apiContext = new ApiContext(new OAuthTokenCredential(
+		'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+		'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
+	));
+	
+	// Define the location of the sdk_config.ini file 
+	define("PP_CONFIG_PATH", dirname(__DIR__));
+	
+	// Alternatively pass in the configuration via a hashmap.
+	// The hashmap can contain any key that is allowed in
+	// sdk_config.ini	
+	/*
+	$apiContext->setConfig(array(
+		'http.ConnectionTimeOut' => 30,
+		'http.Retry' => 1,
+		'mode' => 'sandbox',
+		'log.LogEnabled' => true,
+		'log.FileName' => '../PayPal.log',
+		'log.LogLevel' => 'INFO'		
+	));
+	*/
+	return $apiContext;
+}
