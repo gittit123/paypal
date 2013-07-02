@@ -28,9 +28,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <meta content='IE=Edge,chrome=1' http-equiv='X-UA-Compatible'>
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <title>PizzaShop</title>
-<meta content="authenticity_token" name="csrf-param" />
-<meta content="vpVuNuIt9fRZzLm0eE0gk4h249k0nZPB/WEXWn9ETwg="
-	name="csrf-token" />
 <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
 <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>

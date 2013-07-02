@@ -27,11 +27,13 @@ Running the app
    * Create a new database called *paypal_pizza_app* and update connection parameters in app/bootstrap.php file.
    * Create the necessary tables as give in install/db.sql or simply run the install/create_tables.php file
    * Optionally, update *app/bootstrap.php* with your own client id and client secret.
-   * You are ready. Bring up http://localhost/rest-api-sample-app-php on your favourite browser.	
+   * You are ready. Bring up http://localhost/rest-api-sample-app-php on your favorite browser.
+      * Create a test 'PizzaShop' account from the sign up page and login.
+	  * Order a pizza and select a payment method from the payment review page.
 	
 References
 ----------
 
-   * Github repository for PHP REST API SDK- https://github.com/paypal/rest-api-sdk-php
+   * Github repository for PHP REST API SDK - https://github.com/paypal/rest-api-sdk-php
 
 	 
