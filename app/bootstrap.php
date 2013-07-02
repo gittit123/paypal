@@ -12,7 +12,7 @@ require_once __DIR__ . '/common/paypal.php';
 require_once __DIR__ . '/common/util.php';
 
 use PayPal\Rest\ApiContext;
-use PayPal\Auth\OauthTokenCredential;
+use PayPal\Auth\OAuthTokenCredential;
 
 // Define connection parameters
 define('MYSQL_HOST', 'localhost:3306');
