@@ -15,7 +15,7 @@ Pre-requisites
 
    * PHP 5.3+
    * curl, openssl and mysql PHP extensions
-   * Composer for installing the Rest API SDK
+   * [Composer](http://getcomposer.org/download/) for installing the Rest API SDK.
    * Mysql 5.x server 
 
 	
