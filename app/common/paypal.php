@@ -28,8 +28,8 @@ function saveCard($params) {
 	$card = new CreditCard();
 	$card->setType($params['type']);
 	$card->setNumber($params['number']);
-	$card->setExpire_month($params['expire_month']);
-	$card->setExpire_year($params['expire_year']);
+	$card->setExpireMonth($params['expire_month']);
+	$card->setExpireYear($params['expire_year']);
 	$card->setCvv2($params['cvv2']);
 	
 	$card->create(getApiContext());
@@ -54,19 +54,19 @@ function getCreditCard($cardId) {
  * @param string $creditCardId credit card id
  * @param string $total Payment amount with 2 decimal points
  * @param string $currency 3 letter ISO code for currency
- * @param string $payment_desc
+ * @param string $paymentDesc
  */
-function makePaymentUsingCC($creditCardId, $total, $currency, $payment_desc) {
+function makePaymentUsingCC($creditCardId, $total, $currency, $paymentDesc) {
 		
 	$ccToken = new CreditCardToken();
-	$ccToken->setCredit_card_id($creditCardId);	
+	$ccToken->setCreditCardId($creditCardId);	
 	
 	$fi = new FundingInstrument();
-	$fi->setCredit_card_token($ccToken);
+	$fi->setCreditCardToken($ccToken);
 	
 	$payer = new Payer();
-	$payer->setPayment_method("credit_card");
-	$payer->setFunding_instruments(array($fi));	
+	$payer->setPaymentMethod("credit_card");
+	$payer->setFundingInstruments(array($fi));	
 	
 	// Specify the payment amount.
 	$amount = new Amount();
@@ -79,7 +79,7 @@ function makePaymentUsingCC($creditCardId, $total, $currency, $payment_desc) {
 	// a `Payee` and `Amount` types
 	$transaction = new Transaction();
 	$transaction->setAmount($amount);
-	$transaction->setDescription($payment_desc);
+	$transaction->setDescription($paymentDesc);
 	
 	$payment = new Payment();
 	$payment->setIntent("sale");
@@ -100,7 +100,7 @@ function makePaymentUsingCC($creditCardId, $total, $currency, $payment_desc) {
  * 
  * @param string $total	payment amount in DDD.DD format
  * @param string $currency	3 letter ISO currency code such as 'USD'
- * @param string $payment_desc	A description about the payment
+ * @param string $paymentDesc	A description about the payment
  * @param string $returnUrl	The url to which the buyer must be redirected
  * 				to on successful completion of payment
  * @param string $cancelUrl	The url to which the buyer must be redirected
@@ -108,10 +108,10 @@ function makePaymentUsingCC($creditCardId, $total, $currency, $payment_desc) {
  * @return \PayPal\Api\Payment
  */
 
-function makePaymentUsingPayPal($total, $currency, $payment_desc, $returnUrl, $cancelUrl) {
+function makePaymentUsingPayPal($total, $currency, $paymentDesc, $returnUrl, $cancelUrl) {
 	
 	$payer = new Payer();
-	$payer->setPayment_method("paypal");
+	$payer->setPaymentMethod("paypal");
 	
 	// Specify the payment amount.
 	$amount = new Amount();
@@ -125,20 +125,20 @@ function makePaymentUsingPayPal($total, $currency, $payment_desc, $returnUrl, $c
 	// a `Payee` and `Amount` types
 	$transaction = new Transaction();
 	$transaction->setAmount($amount);
-	$transaction->setDescription($payment_desc);
+	$transaction->setDescription($paymentDesc);
 	
 	$redirectUrls = new RedirectUrls();
-	$redirectUrls->setReturn_url($returnUrl);
-	$redirectUrls->setCancel_url($cancelUrl);
+	$redirectUrls->setReturnUrl($returnUrl);
+	$redirectUrls->setCancelUrl($cancelUrl);
 	
 	$payment = new Payment();
-	$payment->setRedirect_urls($redirectUrls);
+	$payment->setRedirectUrls($redirectUrls);
 	$payment->setIntent("sale");
 	$payment->setPayer($payer);
 	$payment->setTransactions(array($transaction));
 	
-	$payment->create(getApiContext());	
-	return $payment;
+	$payment->create(getApiContext());
+  return $payment;
 }
 
 
@@ -157,7 +157,7 @@ function executePayment($paymentId, $payerId) {
 	
 	$payment = Payment::get($paymentId, getApiContext());
 	$paymentExecution = new PaymentExecution();
-	$paymentExecution->setPayer_id($payerId);	
+	$paymentExecution->setPayerId($payerId);	
 	$payment = $payment->execute($paymentExecution, getApiContext());	
 	
 	return $payment;
