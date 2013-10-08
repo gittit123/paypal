@@ -158,7 +158,7 @@ function executePayment($paymentId, $payerId) {
 	$payment = Payment::get($paymentId, getApiContext());
 	$paymentExecution = new PaymentExecution();
 	$paymentExecution->setPayer_id($payerId);	
-	$payment->execute($paymentExecution, getApiContext());	
+	$payment = $payment->execute($paymentExecution, getApiContext());	
 	
 	return $payment;
 }
