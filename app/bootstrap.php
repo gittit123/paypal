@@ -16,19 +16,24 @@ use PayPal\Auth\OAuthTokenCredential;
 
 // Define connection parameters
 define('MYSQL_HOST', 'localhost:3306');
-define('MYSQL_USERNAME', 'user');
-define('MYSQL_PASSWORD', 'password');
+define('MYSQL_USERNAME', 'root');
+define('MYSQL_PASSWORD', 'root');
 define('MYSQL_DB', 'paypal_pizza_app');
+
+return getApiContext();
 
 // SDK Configuration
 function getApiContext() {
+
+
+    // Define the location of the sdk_config.ini file
+    define("PP_CONFIG_PATH", dirname(__DIR__));
+
 	$apiContext = new ApiContext(new OAuthTokenCredential(
 		'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
 		'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
 	));
-	
-	// Define the location of the sdk_config.ini file 
-	define("PP_CONFIG_PATH", dirname(__DIR__));
+
 	
 	// Alternatively pass in the configuration via a hashmap.
 	// The hashmap can contain any key that is allowed in
