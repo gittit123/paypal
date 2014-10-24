@@ -15,13 +15,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} else {
 		try {			
 			$creditCardId = NULL;
+            // If CVV2 is not required, we need to remove it. We cannot keep it empty or '' as it is considered your CVV2 is set to ''
+            if (isset($_POST['user']['credit_card']['cvv2']) && trim($_POST['user']['credit_card']['cvv2']) == '') {
+                unset($_POST['user']['credit_card']['cvv2']);
+            }
 			// User can configure credit card info later from the
 			// profile page or can use paypal as his funding source.
 			if(trim($_POST['user']['credit_card']['number']) != "") {
 				$creditCardId = saveCard($_POST['user']['credit_card']);
 			}
 			$userId = addUser($_POST['user']['email'], $_POST['user']['password'], $creditCardId);			
-		} catch(PPConnectionException $ex){
+		} catch(\PayPal\Exception\PPConnectionException $ex){
 			$errorMessage = $ex->getData() != '' ? parseApiError($ex->getData()) : $ex->getMessage();
 		} catch (Exception $ex) {
 			$errorMessage = $ex->getMessage();		
@@ -68,12 +72,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <legend>Add Credit Card (Optional)</legend>
 		<p>Your credit card information is stored safely with PayPal.</p>
         <div class="control-group select required"><label class="select required control-label" for="user_credit_card_type"><abbr title="required">*</abbr> Type</label><div class="controls"><select class="select required" id="user_credit_card_type" name="user[credit_card][type]"><option value=""></option>
-        <option value="visa">visa</option>
+        <option value="visa" selected>visa</option>
         <option value="mastercard">mastercard</option>
         <option value="discover">discover</option>
         <option value="amex">amex</option></select></div></div>
-        <div class="control-group string required"><label class="string required control-label" for="user_credit_card_number"><abbr title="required">*</abbr> Number</label><div class="controls"><input class="string required" id="user_credit_card_number" name="user[credit_card][number]" size="50" type="text" /></div></div>
-        <div class="control-group string optional"><label class="string required control-label" for="user_credit_card_cvv2">Cvv2</label><div class="controls"><input class="string optional" id="user_credit_card_cvv2" name="user[credit_card][cvv2]" size="50" type="text" /></div></div>        
+        <div class="control-group string required"><label class="string required control-label" for="user_credit_card_number"><abbr title="required">*</abbr> Number</label><div class="controls"><input class="string required" id="user_credit_card_number" name="user[credit_card][number]" size="50" type="text" value="4417119669820331" /></div></div>
+        <div class="control-group string optional"><label class="string required control-label" for="user_credit_card_cvv2">Cvv2</label><div class="controls"><input class="string optional" id="user_credit_card_cvv2" name="user[credit_card][cvv2]" size="50" type="text" value="012" /></div></div>
         <div class="control-group select required"><label class="select required control-label" for="user_credit_card_expire_month"><abbr title="required">*</abbr> Expire month</label><div class="controls"><select class="select required" id="user_credit_card_expire_month" name="user[credit_card][expire_month]"><option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -85,7 +89,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <option value="8">8</option>
         <option value="9">9</option>
         <option value="10">10</option>
-        <option value="11">11</option>
+        <option selected value="11">11</option>
         <option value="12">12</option></select></div></div>
         <div class="control-group select required"><label class="select required control-label" for="user_credit_card_expire_year"><abbr title="required">*</abbr> Expire year</label><div class="controls"><select class="select required" id="user_credit_card_expire_year" name="user[credit_card][expire_year]"><option value=""></option>
         <option value="2013">2013</option>
@@ -94,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <option value="2016">2016</option>
         <option value="2017">2017</option>
         <option value="2018">2018</option>
-        <option value="2019">2019</option>
+        <option selected value="2019">2019</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>

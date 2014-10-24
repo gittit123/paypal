@@ -58,7 +58,7 @@ try {
 		}
 		
 	} 
-} catch (PPConnectionException $ex) {
+} catch (\PayPal\Exception\PPConnectionException $ex) {
 	$message = parseApiError($ex->getData());
 	$messageType = "error";
 } catch (Exception $ex) {

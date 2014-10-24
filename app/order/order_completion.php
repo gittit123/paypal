@@ -24,7 +24,7 @@ if(isset($_GET['success'])) {
 			updateOrder($orderId, $payment->getState());
 			$messageType = "success";
 			$message = "Your payment was successful. Your order id is $orderId.";
-		} catch (PPConnectionException $ex) {
+		} catch (\PayPal\Exception\PPConnectionException $ex) {
 			$message = parseApiError($ex->getData());
 			$messageType = "error";
 		} catch (Exception $ex) {

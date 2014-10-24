@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			header("Location: " . getLink($payment->getLinks(), "approval_url") );
 			exit;			
 		}
-	} catch (PPConnectionException $ex) {
+	} catch (\PayPal\Exception\PPConnectionException $ex) {
 		$message = parseApiError($ex->getData());
 		$messageType = "error";
 	} catch (Exception $ex) {

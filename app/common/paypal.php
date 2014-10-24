@@ -155,10 +155,22 @@ function makePaymentUsingPayPal($total, $currency, $paymentDesc, $returnUrl, $ca
  */
 function executePayment($paymentId, $payerId) {
 	
-	$payment = Payment::get($paymentId, getApiContext());
+	$payment = getPaymentDetails($paymentId);
 	$paymentExecution = new PaymentExecution();
 	$paymentExecution->setPayerId($payerId);	
 	$payment = $payment->execute($paymentExecution, getApiContext());	
 	
 	return $payment;
+}
+
+/**
+ * Retrieves the payment information based on PaymentID from Paypal APIs
+ *
+ * @param $paymentId
+ *
+ * @return Payment
+ */
+function getPaymentDetails($paymentId) {
+    $payment = Payment::get($paymentId, getApiContext());
+    return $payment;
 }

@@ -62,7 +62,7 @@ try {
 			<tbody>
 				<?php foreach($orders as $order) {?>
 				<tr>
-					<td><?php echo $order['payment_id'];?></td>
+					<td><a href="payment.php?payment_id=<?php echo $order['payment_id'];?>"><?php echo $order['payment_id'];?></a></td>
 					<td><?php echo $order['amount'];?></td>
 					<td><?php echo $order['state'];?></td>
 					<td><?php echo $order['created_time'];?></td>

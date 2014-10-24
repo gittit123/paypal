@@ -27,7 +27,9 @@ function getApiContext() {
 
 
     // Define the location of the sdk_config.ini file
-    define("PP_CONFIG_PATH", dirname(__DIR__));
+    if (!defined("PP_CONFIG_PATH")) {
+        define("PP_CONFIG_PATH", dirname(__DIR__));
+    }
 
 	$apiContext = new ApiContext(new OAuthTokenCredential(
 		'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
