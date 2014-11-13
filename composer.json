@@ -10,6 +10,6 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mysql": "*",
-        "paypal/rest-api-sdk-php" : "0.13.*"
+        "paypal/rest-api-sdk-php" : "0.*"
     }
 }
