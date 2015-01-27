@@ -53,7 +53,13 @@ try {
     <a href="orders.php" >&#10094; Back to Orders</a>
     <h2>Payment Details</h2>
 		<pre>
-            <?php echo $paymentDetails->toJSON(JSON_PRETTY_PRINT); ?>
+            <?php
+                if (defined("JSON_PRETTY_PRINT")) {
+                    echo $paymentDetails->toJSON(JSON_PRETTY_PRINT);
+                }
+                else {
+                    echo $paymentDetails->toJSON();
+                } ?>
 		</pre>
 </div>
 <?php include '../footer.php';?>
