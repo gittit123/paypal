@@ -113,13 +113,13 @@ try {
         <div class='control-group'>
           <label class='control-label'>Expire month</label>
           <div class='controls'>
-            <label class='checkbox'><?php if(isset($card)) echo $card->getExpire_Month();?></label>
+            <label class='checkbox'><?php if(isset($card)) echo $card->getExpireMonth();?></label>
           </div>
         </div>
         <div class='control-group'>
           <label class='control-label'>Expire year</label>
           <div class='controls'>
-            <label class='checkbox'><?php if(isset($card)) echo $card->getExpire_Year();?></label>
+            <label class='checkbox'><?php if(isset($card)) echo $card->getExpireYear();?></label>
           </div>
         </div>
         <a name="newcard"></a>
