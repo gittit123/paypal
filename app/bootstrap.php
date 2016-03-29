@@ -17,7 +17,7 @@ use PayPal\Auth\OAuthTokenCredential;
 // Define connection parameters
 define('MYSQL_HOST', 'localhost:3306');
 define('MYSQL_USERNAME', 'root');
-define('MYSQL_PASSWORD', 'root');
+define('MYSQL_PASSWORD', 'qwop1290');
 define('MYSQL_DB', 'paypal_pizza_app');
 
 return getApiContext();
@@ -32,8 +32,8 @@ function getApiContext() {
     }
 
 	$apiContext = new ApiContext(new OAuthTokenCredential(
-		'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
-		'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
+		'AemJsA6no2EK3iP7PdpzdMSog5T0KAtJd0LVc8mhCxNfpbpZirpQt98oCnJno_rtRLCy_vIA48sAePgr',
+		'EMkLxPe_fzZSHI5y-nwzvk3bTK3Aq4QPBKYHd3mBownXpLzmCQzA58WXTwojRkkT0pwMmriKzoeYyARc'
 	));
 
 	
